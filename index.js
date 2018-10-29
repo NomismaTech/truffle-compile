@@ -52,6 +52,12 @@ var compile = function(sources, options, callback) {
   var operatingSystemIndependentSources = {};
   var originalPathMappings = {};
 
+  if (Array.isArray(options.fileExcludes)) {
+    options.fileExcludes.forEach((fileExclude) => {
+      delete sources[fileExclude];
+    });
+  }
+
   Object.keys(sources).forEach(function(source) {
     // Turn all backslashes into forward slashes
     var replacement = source.replace(/\\/g, "/");
